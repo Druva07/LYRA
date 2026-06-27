@@ -39,6 +39,12 @@ def handle_input(text: str, ai: LyraAI, tts: TTSEngine):
     console.print(f"[bold green]You:[/bold green] {text}")
 
     # Handle local commands
+    if text_lower == "exit" or text_lower == "quit":
+        console.print("[bold cyan]LYRA:[/bold cyan] Goodbye, sir.")
+        tts.speak("Goodbye, sir.")
+        time.sleep(1.5)
+        os._exit(0)
+        
     if "lyra forget that" in text_lower or "forget that" in text_lower:
         response = ai.forget_last()
         console.print(f"[bold cyan]LYRA:[/bold cyan] {response}")
@@ -104,6 +110,21 @@ def main():
     # Start keyboard listener
     listener = keyboard.Listener(on_press=on_press, on_release=on_release)
     listener.start()
+    
+    # Start text input listener
+    def text_input_worker():
+        while True:
+            try:
+                # This will block waiting for Enter
+                text = input()
+                if text.strip():
+                    input_queue.put(text.strip())
+            except EOFError:
+                break
+            except Exception:
+                pass
+
+    threading.Thread(target=text_input_worker, daemon=True).start()
     
     tts.speak("Lyra is online and ready.")
 
