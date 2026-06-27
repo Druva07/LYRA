@@ -1,0 +1,15 @@
+google-genai
+openai-whisper
+sounddevice
+scipy
+edge-tts
+pygame
+pyttsx3
+rich
+psutil
+pyperclip
+pynput
+Pillow
+pycaw
+comtypes
+python-dotenv

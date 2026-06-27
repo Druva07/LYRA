@@ -1,0 +1,21 @@
+# Virtual Environments
+.venv/
+env/
+venv/
+ENV/
+
+# Python Cache
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Environment Variables (Keep API keys out of version control!)
+.env
+
+# OS generated files
+.DS_Store
+Thumbs.db
+
+# VSCode/IDE files
+.vscode/
+.idea/
